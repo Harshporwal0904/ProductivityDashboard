@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const pomodoroSchema = new mongoose.Schema({
   sessionsCompleted: {
@@ -22,4 +22,4 @@ const pomodoroSchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('Pomodoro', pomodoroSchema);
+export default mongoose.model('Pomodoro', pomodoroSchema);

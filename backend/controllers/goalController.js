@@ -1,8 +1,8 @@
-const Goal = require('../models/Goal');
+import Goal from '../models/Goal.js';
 
 // @desc    Get goals for current user (optionally filter by date)
 // @route   GET /api/goals
-const getGoals = async (req, res) => {
+export const getGoals = async (req, res) => {
   try {
     const { date } = req.query;
     let filter = { createdBy: req.user._id };
@@ -25,7 +25,7 @@ const getGoals = async (req, res) => {
 
 // @desc    Create a new goal
 // @route   POST /api/goals
-const createGoal = async (req, res) => {
+export const createGoal = async (req, res) => {
   try {
     const { goalText, date } = req.body;
 
@@ -47,7 +47,7 @@ const createGoal = async (req, res) => {
 
 // @desc    Update a goal (mark completed)
 // @route   PUT /api/goals/:id
-const updateGoal = async (req, res) => {
+export const updateGoal = async (req, res) => {
   try {
     const goal = await Goal.findById(req.params.id);
 
@@ -73,7 +73,7 @@ const updateGoal = async (req, res) => {
 
 // @desc    Delete a goal
 // @route   DELETE /api/goals/:id
-const deleteGoal = async (req, res) => {
+export const deleteGoal = async (req, res) => {
   try {
     const goal = await Goal.findById(req.params.id);
 
@@ -91,5 +91,3 @@ const deleteGoal = async (req, res) => {
     res.status(500).json({ message: 'Error deleting goal' });
   }
 };
-
-module.exports = { getGoals, createGoal, updateGoal, deleteGoal };

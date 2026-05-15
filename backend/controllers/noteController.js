@@ -1,8 +1,8 @@
-const Note = require('../models/Note');
+import Note from '../models/Note.js';
 
 // @desc    Get all notes for current user
 // @route   GET /api/notes
-const getNotes = async (req, res) => {
+export const getNotes = async (req, res) => {
   try {
     // Pinned notes first, then by creation date
     const notes = await Note.find({ createdBy: req.user._id })
@@ -15,7 +15,7 @@ const getNotes = async (req, res) => {
 
 // @desc    Create a new note
 // @route   POST /api/notes
-const createNote = async (req, res) => {
+export const createNote = async (req, res) => {
   try {
     const { title, content, color } = req.body;
 
@@ -38,7 +38,7 @@ const createNote = async (req, res) => {
 
 // @desc    Update a note
 // @route   PUT /api/notes/:id
-const updateNote = async (req, res) => {
+export const updateNote = async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
 
@@ -64,7 +64,7 @@ const updateNote = async (req, res) => {
 
 // @desc    Delete a note
 // @route   DELETE /api/notes/:id
-const deleteNote = async (req, res) => {
+export const deleteNote = async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
 
@@ -82,5 +82,3 @@ const deleteNote = async (req, res) => {
     res.status(500).json({ message: 'Error deleting note' });
   }
 };
-
-module.exports = { getNotes, createNote, updateNote, deleteNote };

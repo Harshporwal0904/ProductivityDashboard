@@ -1,8 +1,8 @@
-const Task = require('../models/Task');
+import Task from '../models/Task.js';
 
 // @desc    Get all tasks for current user
 // @route   GET /api/tasks
-const getTasks = async (req, res) => {
+export const getTasks = async (req, res) => {
   try {
     const tasks = await Task.find({ createdBy: req.user._id }).sort({ createdAt: -1 });
     res.json(tasks);
@@ -13,7 +13,7 @@ const getTasks = async (req, res) => {
 
 // @desc    Create a new task
 // @route   POST /api/tasks
-const createTask = async (req, res) => {
+export const createTask = async (req, res) => {
   try {
     const { title, description, category, priority, dueDate } = req.body;
 
@@ -38,7 +38,7 @@ const createTask = async (req, res) => {
 
 // @desc    Update a task
 // @route   PUT /api/tasks/:id
-const updateTask = async (req, res) => {
+export const updateTask = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
 
@@ -65,7 +65,7 @@ const updateTask = async (req, res) => {
 
 // @desc    Delete a task
 // @route   DELETE /api/tasks/:id
-const deleteTask = async (req, res) => {
+export const deleteTask = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
 
@@ -84,5 +84,3 @@ const deleteTask = async (req, res) => {
     res.status(500).json({ message: 'Error deleting task' });
   }
 };
-
-module.exports = { getTasks, createTask, updateTask, deleteTask };

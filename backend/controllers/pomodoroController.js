@@ -1,8 +1,8 @@
-const Pomodoro = require('../models/Pomodoro');
+import Pomodoro from '../models/Pomodoro.js';
 
 // @desc    Get pomodoro stats for current user
 // @route   GET /api/pomodoro
-const getPomodoroStats = async (req, res) => {
+export const getPomodoroStats = async (req, res) => {
   try {
     const stats = await Pomodoro.find({ createdBy: req.user._id })
       .sort({ date: -1 })
@@ -15,7 +15,7 @@ const getPomodoroStats = async (req, res) => {
 
 // @desc    Log a pomodoro session
 // @route   POST /api/pomodoro
-const logPomodoroSession = async (req, res) => {
+export const logPomodoroSession = async (req, res) => {
   try {
     const { sessionsCompleted, totalMinutes } = req.body;
 
@@ -50,5 +50,3 @@ const logPomodoroSession = async (req, res) => {
     res.status(500).json({ message: 'Error logging pomodoro session' });
   }
 };
-
-module.exports = { getPomodoroStats, logPomodoroSession };

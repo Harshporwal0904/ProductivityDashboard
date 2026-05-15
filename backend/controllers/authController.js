@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
 // Generate JWT token
 const generateToken = (id) => {
@@ -9,7 +9,7 @@ const generateToken = (id) => {
 
 // @desc    Register new user
 // @route   POST /api/auth/register
-const register = async (req, res) => {
+export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
@@ -51,7 +51,7 @@ const register = async (req, res) => {
 
 // @desc    Login user
 // @route   POST /api/auth/login
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -86,7 +86,7 @@ const login = async (req, res) => {
 
 // @desc    Get current user profile
 // @route   GET /api/auth/me
-const getMe = async (req, res) => {
+export const getMe = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select('-password');
     res.json(user);
@@ -94,5 +94,3 @@ const getMe = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-
-module.exports = { register, login, getMe };

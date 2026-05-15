@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { getGoals, createGoal, updateGoal, deleteGoal } = require('../controllers/goalController');
-const { protect } = require('../middleware/auth');
+import { getGoals, createGoal, updateGoal, deleteGoal } from '../controllers/goalController.js';
+import { protect } from '../middleware/auth.js';
 
 router.use(protect);
 
 router.route('/').get(getGoals).post(createGoal);
 router.route('/:id').put(updateGoal).delete(deleteGoal);
 
-module.exports = router;
+export default router;

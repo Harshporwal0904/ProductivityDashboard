@@ -1,10 +1,10 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { getPomodoroStats, logPomodoroSession } = require('../controllers/pomodoroController');
-const { protect } = require('../middleware/auth');
+import { getPomodoroStats, logPomodoroSession } from '../controllers/pomodoroController.js';
+import { protect } from '../middleware/auth.js';
 
 router.use(protect);
 
 router.route('/').get(getPomodoroStats).post(logPomodoroSession);
 
-module.exports = router;
+export default router;
