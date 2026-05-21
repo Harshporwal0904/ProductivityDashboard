@@ -21,7 +21,7 @@ export const protect = async (req, res, next) => {
       }
 
       next();
-    } catch (error) {
+    } catch (error){
       console.error('Auth middleware error:', error.message);
       return res.status(401).json({ message: 'Not authorized, token invalid' });
     }
