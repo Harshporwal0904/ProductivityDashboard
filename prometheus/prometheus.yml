@@ -8,5 +8,10 @@ scrape_configs:
       - targets: ['localhost:9090']
 
   - job_name: 'backend'
+    metrics_path: '/metrics'
     static_configs:
       - targets: ['backend:5000']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'productivity-dashboard-backend'
