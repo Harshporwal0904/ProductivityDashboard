@@ -3,7 +3,7 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - main  # Change to "master" if your default branch is master
+      - main  
 
 jobs:
   deploy:
