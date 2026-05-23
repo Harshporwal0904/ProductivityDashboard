@@ -11,6 +11,10 @@ services:
     env_file:
       - ./backend/.env
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 250M
 
   frontend:
     build:
@@ -21,6 +25,10 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 50M
 
   prometheus:
     image: prom/prometheus:latest
@@ -37,6 +45,10 @@ services:
     ports:
       - "9090:9090"
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 150M
 
   grafana:
     image: grafana/grafana:latest
@@ -51,7 +63,12 @@ services:
     depends_on:
       - prometheus
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 250M
 
 volumes:
   prometheus_data:
   grafana_data:
+
