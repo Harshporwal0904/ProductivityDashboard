@@ -91,7 +91,7 @@ export default function Sidebar({ isOpen, onClose }) {
               color: '#f1f5f9',
               letterSpacing: '-0.02em',
             }}>
-              ProDash
+              ProdDash
             </span>
           </div>
           <button
